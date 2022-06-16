@@ -26,6 +26,12 @@ gem 'bootsnap', '>= 1.4.4', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # brings the RSpec testing framework to rails
+  gem 'rspec-rails'
+  # using for define test fixtures
+  gem 'factory_bot_rails'
+  # easy to generate fake data in unit test
+  gem "ffaker"
 end
 
 group :development do
@@ -37,6 +43,8 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  # Help notice wasted queries like n+1
+  gem 'bullet'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
