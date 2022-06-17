@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_17_045045) do
+ActiveRecord::Schema.define(version: 2022_06_17_090345) do
 
   create_table "detect_items", force: :cascade do |t|
     t.integer "detect_list_id"
@@ -38,6 +38,15 @@ ActiveRecord::Schema.define(version: 2022_06_17_045045) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "user_sessions", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "token", null: false
+    t.datetime "expired_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_user_sessions_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -47,4 +56,5 @@ ActiveRecord::Schema.define(version: 2022_06_17_045045) do
   add_foreign_key "detect_items", "detect_lists"
   add_foreign_key "detect_items", "stocks"
   add_foreign_key "detect_lists", "users"
+  add_foreign_key "user_sessions", "users"
 end
