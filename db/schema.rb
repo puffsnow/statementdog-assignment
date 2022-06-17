@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_17_043244) do
+ActiveRecord::Schema.define(version: 2022_06_17_045045) do
+
+  create_table "detect_items", force: :cascade do |t|
+    t.integer "detect_list_id"
+    t.integer "stock_id"
+    t.integer "position"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["detect_list_id", "stock_id"], name: "index_detect_items_on_detect_list_id_and_stock_id", unique: true
+    t.index ["detect_list_id"], name: "index_detect_items_on_detect_list_id"
+    t.index ["stock_id"], name: "index_detect_items_on_stock_id"
+  end
 
   create_table "detect_lists", force: :cascade do |t|
     t.integer "user_id"
@@ -33,5 +44,7 @@ ActiveRecord::Schema.define(version: 2022_06_17_043244) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "detect_items", "detect_lists"
+  add_foreign_key "detect_items", "stocks"
   add_foreign_key "detect_lists", "users"
 end

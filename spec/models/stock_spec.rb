@@ -11,4 +11,9 @@ RSpec.describe Stock, type: :model do
       it { expect(described_class.new(name: FFaker::Name.name, code: '111').valid?).to be_falsy }
     end
   end
+
+  describe 'relationships' do
+    it { should have_many(:detect_items) }
+    it { should have_many(:detect_lists) }
+  end
 end
