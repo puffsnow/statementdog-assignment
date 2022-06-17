@@ -32,6 +32,8 @@ group :development, :test do
   gem 'factory_bot_rails'
   # easy to generate fake data in unit test
   gem "ffaker"
+  # simplefied rspec code
+  gem "shoulda-matchers"
 end
 
 group :development do
