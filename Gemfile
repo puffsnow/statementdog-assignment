@@ -34,6 +34,8 @@ group :development, :test do
   gem "ffaker"
   # simplefied rspec code
   gem "shoulda-matchers"
+  # handle time for rspec test
+  gem "timecop"
 end
 
 group :development do
