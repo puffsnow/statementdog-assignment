@@ -9,4 +9,13 @@ RSpec.describe UserSession, type: :model do
   describe 'relationships' do
     it { should belong_to(:user) }
   end
+
+  describe '#initialize' do
+    context 'new record' do
+      subject { UserSession.new }
+
+      it { expect(subject.expired_at.to_date).to eq((Time.current + 30.days).to_date) }
+      it { expect(subject.token).to be_present }
+    end
+  end
 end

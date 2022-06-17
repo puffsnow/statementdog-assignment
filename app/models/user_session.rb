@@ -5,4 +5,15 @@ class UserSession < ApplicationRecord
   validates :expired_at, presence: true
 
   belongs_to :user
+
+  scope :active, -> { where('expired_at > ?', Time.current) }
+
+  after_initialize :assign_data, if: :new_record?
+
+  private
+
+  def assign_data
+    self.expired_at = Time.current + ACTIVE_DURATION
+    self.token = SecureRandom.hex(16)
+  end
 end
