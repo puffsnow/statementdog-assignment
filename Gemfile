@@ -28,12 +28,16 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # brings the RSpec testing framework to rails
   gem 'rspec-rails'
+  # some spec method has been extracted
+  gem 'rails-controller-testing'
   # using for define test fixtures
   gem 'factory_bot_rails'
   # easy to generate fake data in unit test
   gem "ffaker"
   # simplefied rspec code
   gem "shoulda-matchers"
+  # handle time for rspec test
+  gem "timecop"
 end
 
 group :development do
