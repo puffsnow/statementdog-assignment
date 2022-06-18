@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: stocks
+#
+#  id         :integer          not null, primary key
+#  code       :string           not null
+#  name       :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 require 'rails_helper'
 
 RSpec.describe Stock, type: :model do
