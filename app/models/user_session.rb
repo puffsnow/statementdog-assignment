@@ -10,6 +10,10 @@ class UserSession < ApplicationRecord
 
   after_initialize :assign_data, if: :new_record?
 
+  def expired?
+    self.expired_at < Time.current
+  end
+
   private
 
   def assign_data
