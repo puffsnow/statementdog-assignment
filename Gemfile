@@ -51,6 +51,8 @@ group :development do
   gem 'spring'
   # Help notice wasted queries like n+1
   gem 'bullet'
+  # Generate table design schema in model for reference
+  gem "annotate"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
