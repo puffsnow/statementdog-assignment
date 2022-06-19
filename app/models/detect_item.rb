@@ -21,16 +21,16 @@
 #  stock_id        (stock_id => stocks.id)
 #
 class DetectItem < ApplicationRecord
+  include Swappable
+
   validates :detect_list_id, uniqueness: { scope: :stock_id }
 
   belongs_to :detect_list
   belongs_to :stock
 
-  after_create :initialize_position
-
   private
 
-  def initialize_position
-    self.update(position: self.id)
+  def swappable_parent
+    detect_list
   end
 end
