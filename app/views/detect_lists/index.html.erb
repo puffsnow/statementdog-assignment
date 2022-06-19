@@ -5,6 +5,7 @@
 <% @detect_lists.each do |detect_list| %>
   <h3><%= detect_list.name %></h3>
   <%= link_to 'update list', edit_detect_list_path(detect_list) %>
+  <%= link_to 'add list stock', new_detect_list_detect_item_path(detect_list) %>
   <table>
     <thead>
       <tr>
