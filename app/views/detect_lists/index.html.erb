@@ -1,0 +1,27 @@
+<%= link_to 'create list', new_detect_list_path %>
+
+<hr>
+
+<% @detect_lists.each do |detect_list| %>
+  <h3><%= detect_list.name %></h3>
+  <%= link_to 'update list', edit_detect_list_path(detect_list) %>
+  <table>
+    <thead>
+      <tr>
+        <th>name</th>
+        <th>code</th>
+        <th>actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% detect_list.detect_items.each do |detect_item| %>
+        <tr>
+          <td><%= detect_item.stock.name %></td>
+          <td><%= detect_item.stock.code %></td>
+          <td></td>
+        <tr>
+      <% end %>
+    </tbody>
+  </table>
+  <hr>
+<% end %>
