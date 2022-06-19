@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   rescue_from UniversalError do |e|
-    flash[:alert] = e.message
+    flash[:alert] = e.error_message
 
     if e.redirect_path.present?
       redirect_to e.redirect_path
