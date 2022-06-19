@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe 'Users', type: :request do
+RSpec.describe UsersController, type: :controller do
   describe 'GET /' do
     let!(:users) { create_list(:user, 3) }
     it 'assign @users' do
-      get '/users'
+      get 'index'
 
       expect(assigns(:users).length).to eq(3)
     end
@@ -13,7 +13,7 @@ RSpec.describe 'Users', type: :request do
   describe 'GET /:id/become' do
     context 'user exist' do
       let(:user) { create(:user) }
-      subject { get "/users/#{user.id}/become" }
+      subject { get "become", params: { id: user.id } }
 
       it 'create user session' do
         expect { subject }.to change { UserSession.count }.by(1)
