@@ -25,4 +25,12 @@ class DetectItem < ApplicationRecord
 
   belongs_to :detect_list
   belongs_to :stock
+
+  after_create :initialize_position
+
+  private
+
+  def initialize_position
+    self.update(position: self.id)
+  end
 end
