@@ -5,7 +5,7 @@ class DetectListsController < ApplicationController
   before_action :authenticate_detect_list_user, only: [:edit, :update]
 
   def index
-    @detect_lists = current_user.detect_lists.includes(detect_items: [:stock])
+    @detect_lists = current_user.detect_lists.includes(display_detect_items: :stock)
   end
 
   def new

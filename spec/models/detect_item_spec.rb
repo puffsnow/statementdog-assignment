@@ -39,4 +39,52 @@ RSpec.describe DetectItem, type: :model do
     it { should belong_to(:stock) }
     it { should belong_to(:detect_list) }
   end
+
+  describe 'swappable' do
+    let(:detect_list) { create(:detect_list) }
+    let!(:detect_items) { create_list(:detect_item, 3, detect_list: detect_list) }
+    before do
+      detect_items[0].update(position: 1)
+      detect_items[1].update(position: 2)
+      detect_items[2].update(position: 3)
+    end
+
+    context 'direction item exist' do
+      context 'up' do
+        it 'should swap each postion when up' do
+          detect_items[1].move(direction: 'up')
+
+          expect(detect_items[0].reload.position).to eq(2)
+          expect(detect_items[1].reload.position).to eq(1)
+        end
+      end
+
+      context 'down' do
+        it 'should swap each postion when up' do
+          detect_items[1].move(direction: 'down')
+
+          expect(detect_items[1].reload.position).to eq(3)
+          expect(detect_items[2].reload.position).to eq(2)
+        end
+      end
+    end
+
+    context 'direction item not exist' do
+      context 'up' do
+        it 'should keep original postion ' do
+          detect_items[0].move(direction: 'up')
+
+          expect(detect_items[0].reload.position).to eq(1)
+        end
+      end
+
+      context 'down' do
+        it 'should keep original postion ' do
+          detect_items[2].move(direction: 'down')
+
+          expect(detect_items[2].reload.position).to eq(3)
+        end
+      end
+    end
+  end
 end
