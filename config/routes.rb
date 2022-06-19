@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   resources :users, only: [:index] do
     get  :become, on: :member
   end
+
+  resources :detect_lists, only: [:index, :new, :create, :edit, :update]
 end
