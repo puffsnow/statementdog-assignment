@@ -6,5 +6,7 @@ Rails.application.routes.draw do
     get  :become, on: :member
   end
 
-  resources :detect_lists, only: [:index, :new, :create, :edit, :update]
+  resources :detect_lists, only: [:index, :new, :create, :edit, :update] do
+    resources :detect_items, only: [:new, :create], module: :detect_lists
+  end
 end
