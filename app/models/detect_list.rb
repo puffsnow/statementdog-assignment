@@ -21,7 +21,7 @@ class DetectList < ApplicationRecord
   include Swappable
 
   belongs_to :user
-  has_many :detect_items
+  has_many :detect_items, dependent: :destroy
   has_many :display_detect_items, -> { order(:position) }, class_name: 'DetectItem'
   has_many :stocks, through: :detect_items
 

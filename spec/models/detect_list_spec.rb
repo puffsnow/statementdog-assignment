@@ -24,5 +24,14 @@ RSpec.describe DetectList, type: :model do
     it { should belong_to(:user) }
     it { should have_many(:detect_items) }
     it { should have_many(:stocks) }
+
+    context 'destroy' do
+      let!(:detect_list) { create(:detect_list) }
+      let!(:detect_item) { create(:detect_item, detect_list: detect_list) }
+
+      subject { detect_list.destroy }
+
+      it { expect { subject }.to change { DetectItem.count }.by(-1) }
+    end
   end
 end
