@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :detect_items, only: [:new, :create], module: :detect_lists
   end
 
-  resources :detect_items, only: [] do
+  resources :detect_items, only: [:destroy] do
     get :move, on: :member
   end
 end

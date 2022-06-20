@@ -12,6 +12,12 @@ class DetectItemsController < ApplicationController
     redirect_to detect_lists_path
   end
 
+  def destroy
+    @detect_item.destroy
+
+    redirect_to detect_lists_path
+  end
+
   private
 
   def authenticate_detect_list_user

@@ -27,6 +27,7 @@
           <td>
             <%= detect_item_index > 0 ? link_to('up', move_detect_item_path(detect_item, direction: 'up')) : 'up' %>
             <%= detect_item_index < detect_list.display_detect_items.length - 1 ? link_to('down', move_detect_item_path(detect_item, direction: 'down')) : 'down' %>
+            <%= link_to 'delete item', detect_item_path(detect_item), data: { confirm: 'Are you sure?' }, method: :delete %>
           </td>
         <tr>
       <% end %>

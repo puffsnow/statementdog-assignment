@@ -1,6 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe DetectItemsController, type: :controller do
+  describe 'DELETE /destroy', signed_in: :user do
+    context 'delete detect item success' do
+      let(:detect_list) { create(:detect_list, user: user) }
+      let(:detect_item) { create(:detect_item, detect_list: detect_list) }
+
+      subject { delete 'destroy', params: { id: detect_item.id } }
+
+      it 'new detect list with correct data' do
+        subject
+
+        expect { detect_item.reload }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+  end
+
   describe 'GET /move', signed_in: :user do
     context 'swap success' do
       let(:detect_list) { create(:detect_list, user: user) }
