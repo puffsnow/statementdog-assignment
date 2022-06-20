@@ -2,10 +2,10 @@ class DetectListsController < ApplicationController
   include Authenticate
 
   before_action :authenticate!
-  before_action :authenticate_detect_list_user, only: [:edit, :update]
+  before_action :authenticate_detect_list_user, only: [:edit, :update, :move]
 
   def index
-    @detect_lists = current_user.detect_lists.includes(display_detect_items: :stock)
+    @detect_lists = current_user.detect_lists.includes(display_detect_items: :stock).order(position: :asc)
   end
 
   def new
@@ -25,6 +25,14 @@ class DetectListsController < ApplicationController
 
   def update
     @detect_list.update(detect_list_params)
+
+    redirect_to detect_lists_path
+  end
+
+  def move
+    raise UniversalError.new('Direction is needed', redirect_path: detect_lists_path) if params['direction'].nil?
+
+    @detect_list.move(direction: params['direction'])
 
     redirect_to detect_lists_path
   end
