@@ -2,8 +2,8 @@
   <thead>
     <tr>
       <th>id</th>
-      <th>name</th>
-      <th>actions</th>
+      <th>名稱</th>
+      <th>操作</th>
     </tr>
   </thead>
   <tbody>
@@ -12,7 +12,7 @@
         <td><%= user.id %></td>
         <td><%= user.name %></td>
         <td>
-          <%= link_to '成為 user', become_user_path(user) %>
+          <%= link_to '切換身份', become_user_path(user) %>
         </td>
       <tr>
     <% end %>

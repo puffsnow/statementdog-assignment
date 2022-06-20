@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>StatementdogBackendTakeHomeProject</title>
+    <title>財報狗作業</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -12,10 +12,10 @@
   <body>
     <div class='container'>
       <% if notice %>
-        Notice: <%= notice %><br>
+        提示訊息： <%= notice %><br>
       <% end %>
       <% if alert %>
-        Alert: <%= alert %><br>
+        警告訊息： <%= alert %><br>
       <% end %>
       <%= yield %>
     </div>
