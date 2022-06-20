@@ -65,18 +65,33 @@ RSpec.describe DetectListsController, type: :controller do
     end
   end
 
-  describe 'Update /edit', signed_in: :user do
+  describe 'PATCH /update', signed_in: :user do
     context 'update detect list success' do
       let(:new_name) { FFaker::Name.name }
       let(:detect_list) { create(:detect_list, user: user) }
 
-      subject { post 'update', params: { id: detect_list.id, detect_list: { name: new_name } } }
+      subject { patch 'update', params: { id: detect_list.id, detect_list: { name: new_name } } }
 
       it 'new detect list with correct data' do
         subject
 
         expect(flash[:alert]).to be_nil
         expect(detect_list.reload.name).to eq(new_name)
+      end
+    end
+  end
+
+  describe 'DELETE /destroy', signed_in: :user do
+    context 'delete detect list success' do
+      let(:detect_list) { create(:detect_list, user: user) }
+
+      subject { delete 'destroy', params: { id: detect_list.id } }
+
+      it 'new detect list with correct data' do
+        subject
+
+        expect(flash[:alert]).to be_nil
+        expect { detect_list.reload }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end

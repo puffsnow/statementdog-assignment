@@ -8,6 +8,8 @@
   <%= detect_list_index < @detect_lists.length - 1 ? link_to('down', move_detect_list_path(detect_list, direction: 'down')) : 'down' %>
   <br>
   <%= link_to 'update list', edit_detect_list_path(detect_list) %>
+  <%= link_to 'delete list', detect_list_path(detect_list), data: { confirm: 'Are you sure?' }, method: :delete %>
+  <br>
   <%= link_to 'add list stock', new_detect_list_detect_item_path(detect_list) %>
   <table>
     <thead>
