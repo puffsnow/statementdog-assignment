@@ -4,6 +4,7 @@
 #
 #  id         :integer          not null, primary key
 #  name       :string
+#  position   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  user_id    :integer
@@ -17,9 +18,16 @@
 #  user_id  (user_id => users.id)
 #
 class DetectList < ApplicationRecord
+  include Swappable
+
   belongs_to :user
   has_many :detect_items
   has_many :display_detect_items, -> { order(:position) }, class_name: 'DetectItem'
   has_many :stocks, through: :detect_items
 
+  private
+
+  def swappable_parent
+    user
+  end
 end
