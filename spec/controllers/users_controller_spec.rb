@@ -26,10 +26,10 @@ RSpec.describe UsersController, type: :controller do
         expect(session[:auth_token]).to eq(user.user_sessions.first.token)
       end
 
-      it 'redirect to users index' do
+      it 'redirect to detect list index' do
         subject
 
-        expect(response).to redirect_to(users_path)
+        expect(response).to redirect_to(detect_lists_path)
       end
     end
   end

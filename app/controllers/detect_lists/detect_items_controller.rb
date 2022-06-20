@@ -5,6 +5,7 @@ class DetectLists::DetectItemsController < ApplicationController
   before_action :authenticate_detect_list_user
 
   def new
+    @stocks = Stock.all
   end
 
   def create

@@ -1,22 +1,23 @@
-<%= link_to 'create list', new_detect_list_path %>
+<%= link_to '建立追蹤清單', new_detect_list_path %>
+<%= link_to '切換使用者', users_path %>
 
 <hr>
 
 <% @detect_lists.each_with_index do |detect_list, detect_list_index| %>
   <h3><%= detect_list.name %></h3>
-  <%= detect_list_index > 0 ? link_to('up', move_detect_list_path(detect_list, direction: 'up')) : 'up' %>
-  <%= detect_list_index < @detect_lists.length - 1 ? link_to('down', move_detect_list_path(detect_list, direction: 'down')) : 'down' %>
+  <%= detect_list_index > 0 ? link_to('上移', move_detect_list_path(detect_list, direction: 'up')) : '上移' %>
+  <%= detect_list_index < @detect_lists.length - 1 ? link_to('下移', move_detect_list_path(detect_list, direction: 'down')) : '下移' %>
   <br>
-  <%= link_to 'update list', edit_detect_list_path(detect_list) %>
-  <%= link_to 'delete list', detect_list_path(detect_list), data: { confirm: 'Are you sure?' }, method: :delete %>
+  <%= link_to '編輯追蹤清單名稱', edit_detect_list_path(detect_list) %>
+  <%= link_to '刪除追蹤清單', detect_list_path(detect_list), data: { confirm: '您確定要刪除？' }, method: :delete %>
   <br>
-  <%= link_to 'add list stock', new_detect_list_detect_item_path(detect_list) %>
+  <%= link_to '新增追蹤股', new_detect_list_detect_item_path(detect_list) %>
   <table>
     <thead>
       <tr>
-        <th>name</th>
-        <th>code</th>
-        <th>actions</th>
+        <th>股票名稱</th>
+        <th>股票代碼</th>
+        <th>操作</th>
       </tr>
     </thead>
     <tbody>
@@ -25,9 +26,9 @@
           <td><%= detect_item.stock.name %></td>
           <td><%= detect_item.stock.code %></td>
           <td>
-            <%= detect_item_index > 0 ? link_to('up', move_detect_item_path(detect_item, direction: 'up')) : 'up' %>
-            <%= detect_item_index < detect_list.display_detect_items.length - 1 ? link_to('down', move_detect_item_path(detect_item, direction: 'down')) : 'down' %>
-            <%= link_to 'delete item', detect_item_path(detect_item), data: { confirm: 'Are you sure?' }, method: :delete %>
+            <%= detect_item_index > 0 ? link_to('上移', move_detect_item_path(detect_item, direction: 'up')) : '上移' %>
+            <%= detect_item_index < detect_list.display_detect_items.length - 1 ? link_to('下移', move_detect_item_path(detect_item, direction: 'down')) : '下移' %>
+            <%= link_to '刪除', detect_item_path(detect_item), data: { confirm: '您確定要刪除？' }, method: :delete %>
           </td>
         <tr>
       <% end %>
