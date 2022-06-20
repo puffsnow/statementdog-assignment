@@ -3,12 +3,20 @@ require 'rails_helper'
 RSpec.describe DetectLists::DetectItemsController, type: :controller do
   describe "GET /new", signed_in: :user do
     context 'success case' do
-      let(:detect_list) { create(:detect_list, user: user) }
+      let!(:detect_list) { create(:detect_list, user: user) }
+      let!(:stocks) { create_list(:stock, 2) }
 
       it 'assign @detect_list' do
         get 'new', params: { detect_list_id: detect_list.id }
 
         expect(assigns(:detect_list)).to be_present
+      end
+
+      it 'assign stocks' do
+        get 'new', params: { detect_list_id: detect_list.id }
+
+        expect(assigns(:stocks)).to be_present
+        expect(assigns(:stocks).length).to eq(2)
       end
     end
 

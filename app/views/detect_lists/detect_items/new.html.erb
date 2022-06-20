@@ -4,3 +4,20 @@
 
   <%= f.submit "確認" %>
 <% end %>
+
+<hr>
+<h3>股票列表</h3>
+<table>
+  <thead>
+    <th>股票名稱</th>
+    <th>股票代碼</th>
+  </thead>
+  <tbody>
+    <% @stocks.each do |stock| %>
+      <tr>
+        <td><%= stock.name %></td>
+        <td><%= stock.code %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
