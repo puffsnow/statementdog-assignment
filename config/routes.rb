@@ -6,13 +6,13 @@ Rails.application.routes.draw do
     get  :become, on: :member
   end
 
-  resources :detect_lists, only: [:index, :new, :create, :edit, :update] do
+  resources :detect_lists, except: [:show] do
     get :move, on: :member
 
     resources :detect_items, only: [:new, :create], module: :detect_lists
   end
 
-  resources :detect_items, only: [] do
+  resources :detect_items, only: [:destroy] do
     get :move, on: :member
   end
 end
