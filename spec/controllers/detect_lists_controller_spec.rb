@@ -80,4 +80,42 @@ RSpec.describe DetectListsController, type: :controller do
       end
     end
   end
+
+  describe 'GET /move', signed_in: :user do
+    context 'swap success' do
+      let(:detect_lists) { create_list(:detect_list, 3, user: user) }
+
+      before do
+        detect_lists[0].update(position: 1)
+        detect_lists[1].update(position: 2)
+        detect_lists[2].update(position: 3)
+      end
+
+      it 'swap lists positions with up' do
+        get 'move', params: { id: detect_lists[1].id, direction: 'up'}
+
+        expect(detect_lists[0].reload.position).to eq(2)
+        expect(detect_lists[1].reload.position).to eq(1)
+      end
+
+      it 'swap lists positions with down' do
+        get 'move', params: { id: detect_lists[1].id, direction: 'down'}
+
+        expect(detect_lists[1].reload.position).to eq(3)
+        expect(detect_lists[2].reload.position).to eq(2)
+      end
+
+      it 'nothing happened when appraoch bound' do
+        get 'move', params: { id: detect_lists[2].id, direction: 'down'}
+
+        expect(detect_lists[2].reload.position).to eq(3)
+      end
+
+      it 'redirect to list page' do
+        get 'move', params: { id: detect_lists[1].id, direction: 'down'}
+
+        expect(response).to redirect_to(detect_lists_path)
+      end
+    end
+  end
 end

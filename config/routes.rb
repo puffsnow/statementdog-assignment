@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   end
 
   resources :detect_lists, only: [:index, :new, :create, :edit, :update] do
+    get :move, on: :member
+
     resources :detect_items, only: [:new, :create], module: :detect_lists
   end
 

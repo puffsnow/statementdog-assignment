@@ -2,8 +2,11 @@
 
 <hr>
 
-<% @detect_lists.each do |detect_list| %>
+<% @detect_lists.each_with_index do |detect_list, detect_list_index| %>
   <h3><%= detect_list.name %></h3>
+  <%= detect_list_index > 0 ? link_to('up', move_detect_list_path(detect_list, direction: 'up')) : 'up' %>
+  <%= detect_list_index < @detect_lists.length - 1 ? link_to('down', move_detect_list_path(detect_list, direction: 'down')) : 'down' %>
+  <br>
   <%= link_to 'update list', edit_detect_list_path(detect_list) %>
   <%= link_to 'add list stock', new_detect_list_detect_item_path(detect_list) %>
   <table>
@@ -15,13 +18,13 @@
       </tr>
     </thead>
     <tbody>
-      <% detect_list.display_detect_items.each_with_index do |detect_item, index| %>
+      <% detect_list.display_detect_items.each_with_index do |detect_item, detect_item_index| %>
         <tr>
           <td><%= detect_item.stock.name %></td>
           <td><%= detect_item.stock.code %></td>
           <td>
-            <%= index > 0 ? link_to('up', move_detect_item_path(detect_item, direction: 'up')) : 'up' %>
-            <%= index < detect_list.display_detect_items.length - 1 ? link_to('down', move_detect_item_path(detect_item, direction: 'down')) : 'down' %>
+            <%= detect_item_index > 0 ? link_to('up', move_detect_item_path(detect_item, direction: 'up')) : 'up' %>
+            <%= detect_item_index < detect_list.display_detect_items.length - 1 ? link_to('down', move_detect_item_path(detect_item, direction: 'down')) : 'down' %>
           </td>
         <tr>
       <% end %>
