@@ -9,6 +9,6 @@ class UsersController < ApplicationController
 
     session['auth_token'] = user_session.token
 
-    redirect_to users_path
+    redirect_to detect_lists_path
   end
 end
