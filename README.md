@@ -24,6 +24,8 @@ This is fork from statementdog assignment
 git clone git@github.com:puffsnow/statementdog-assignment.git
 # 切換到專案資料夾
 cd statementdog-assignment
+# 切換 ruby 版本，個人習慣使用 rvm
+rvm use 3.0.4
 # 基本安裝
 bundle install
 bundle exec rake db:migrate
@@ -31,6 +33,9 @@ bundle exec rake db:seed
 yarn install
 # 執行專案
 bundle exec rails s
+
+# 執行測試
+bundle exec rspec spec/
 ```
 
 # 專案架構
@@ -38,9 +43,10 @@ bundle exec rails s
 	- 每次切換時，會以使用者登入的情境考慮，給予他一個新的 token，並記錄在 session 做驗證
 - 追蹤清單（detect_list）和股票（stock）之間是多對多的關聯，用（detect_item）記錄
 - 追蹤清單（detect_list）的刪除，也會連帶刪除（detect_item）
-- Swappable 是為了調整順序功能而建立的 module，model 只需要以下條件
-	- 要有 position 的欄位
-	- 要定義 swappable_parent，描述說是以什麼樣的群體在做排序
+- Swappable 是為了調整順序功能而建立的 module
+  - model 只需要以下條件
+	  - 要有 position 的欄位
+	  - 要定義 swappable_parent，描述說是以什麼樣的群體在做排序
 	- position 預設與 id 相同，這樣子在刪除和交換時，可以少考慮很多事情
 	- 作業沒有要求但為了表示這個 module 是可以利用在任何 model 上的，所以也套用在 detect_item 上
 	- 但 detect_item 也必須要避免 n + 1 的問題，所以為了 detect_list 頁要另外建立一個 scope，讓 detect_items 是排序後的結果
