@@ -45,11 +45,11 @@ bundle exec rspec spec/
 - 追蹤清單（detect_list）的刪除，也會連帶刪除（detect_item）
 - Swappable 是為了調整順序功能而建立的 module
   - model 只需要以下條件
-	  - 要有 position 的欄位
-	  - 要定義 swappable_parent，描述說是以什麼樣的群體在做排序
-	- position 預設與 id 相同，這樣子在刪除和交換時，可以少考慮很多事情
-	- 作業沒有要求但為了表示這個 module 是可以利用在任何 model 上的，所以也套用在 detect_item 上
-	- 但 detect_item 也必須要避免 n + 1 的問題，所以為了 detect_list 頁要另外建立一個 scope，讓 detect_items 是排序後的結果
+	- 要有 position 的欄位
+	- 要定義 swappable_parent，描述說是以什麼樣的群體在做排序
+  - position 預設與 id 相同，這樣子在刪除和交換時，可以少考慮很多事情
+  - 作業沒有要求但為了表示這個 module 是可以利用在任何 model 上的，所以也套用在 detect_item 上
+  - 但 detect_item 也必須要避免 n + 1 的問題，所以為了 detect_list 頁要另外建立一個 scope，讓 detect_items 是排序後的結果
 - 自定義了 UniversalError，來處理一些可預期的操作錯誤，並定義顯示的錯誤訊息以及行為
 	- 後續可以考慮的：UniversalError 是否可以再做分類、像 RecordNotFound 這種 error，也該做處理（目前應該是會顯示 404）
 - 寫測試的時機：
